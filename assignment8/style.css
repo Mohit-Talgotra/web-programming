@@ -1,0 +1,9 @@
+ol {
+    color: red;
+    list-style-type: upper-roman;
+    border: 2px solid powderblue;
+}
+
+h1 {
+    text-align: center;
+}

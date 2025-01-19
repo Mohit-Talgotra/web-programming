@@ -1,6 +1,6 @@
 document.addEventListener("DOMContentLoaded", function () {
-    const repoOwner = "YOUR_USERNAME";
-    const repoName = "YOUR_REPOSITORY";
+    const repoOwner = "Mohit-Talgotra";
+    const repoName = "web-programming";
     const branch = "main";
 
     function createFileList(files, parentElement) {

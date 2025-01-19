@@ -3,20 +3,37 @@ document.addEventListener("DOMContentLoaded", function () {
     const repoName = "web-programming";
     const branch = "main";
 
-    fetch(`https://api.github.com/repos/${repoOwner}/${repoName}/contents?ref=${branch}`)
-        .then(response => response.json())
-        .then(data => {
-            const fileList = document.getElementById("fileList");
-            data.forEach(item => {
-                if (item.type === "file" && item.name.endsWith(".html")) {
-                    const li = document.createElement("li");
-                    const link = document.createElement("a");
-                    link.href = `/${repoName}/${item.name}`;
-                    link.textContent = item.name;
-                    li.appendChild(link);
-                    fileList.appendChild(li);
-                }
-            });
-        })
-        .catch(error => console.error('Error fetching repository contents:', error));
+    function createFileList(files, parentElement) {
+        files.forEach(item => {
+            if (item.type === "file" && item.name.endsWith(".html") && item.name !== "index.html") {
+                const li = document.createElement("li");
+                const link = document.createElement("a");
+                link.href = `/${repoName}/${item.path}`;
+                link.textContent = item.name;
+                li.appendChild(link);
+                parentElement.appendChild(li);
+            }
+            else if (item.type === "dir") {
+                const li = document.createElement("li");
+                const folderName = document.createElement("strong");
+                folderName.textContent = item.name;
+                li.appendChild(folderName);
+
+                const nestedList = document.createElement("ul");
+                li.appendChild(nestedList);
+
+                fetchFolderContents(item.path, nestedList);
+                parentElement.appendChild(li);
+            }
+        });
+    }
+
+    function fetchFolderContents(path, parentElement) {
+        fetch(`https://api.github.com/repos/${repoOwner}/${repoName}/contents/${path}?ref=${branch}`)
+            .then(response => response.json())
+            .then(data => createFileList(data, parentElement))
+            .catch(error => console.error('Error fetching folder contents:', error));
+    }
+
+    fetchFolderContents('', document.getElementById("fileList"));
 });

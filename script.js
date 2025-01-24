@@ -5,8 +5,14 @@ document.addEventListener("DOMContentLoaded", function () {
 
     function createFileList(files, parentElement) {
         const sortedFiles = files.sort((a, b) => {
+            if (a.type === "file" && b.type === "file") {
+                const numA = parseInt(a.name.match(/assignment(\d+)/)?.[1] || 0, 10);
+                const numB = parseInt(b.name.match(/assignment(\d+)/)?.[1] || 0, 10);
+                return numA - numB;
+            }
             return a.name.localeCompare(b.name);
         });
+        
 
         const container = document.createElement("div");
         container.className = "file-list-container";
@@ -111,7 +117,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     folderName.textContent = item.name;
                     
                     const folderContent = document.createElement("div");
-                    folderContent.className = "folder-content";
+                    folderContent.className = "folder-content collapsed";
 
                     folderName.addEventListener('click', () => {
                         folderContent.classList.toggle('collapsed');

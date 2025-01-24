@@ -5,8 +5,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
     function createFileList(files, parentElement) {
         const sortedFiles = files.sort((a, b) => {
-            if (a.type === 'dir' && b.type !== 'dir') return -1;
-            if (a.type !== 'dir' && b.type === 'dir') return 1;
             return a.name.localeCompare(b.name);
         });
 
@@ -85,11 +83,9 @@ document.addEventListener("DOMContentLoaded", function () {
                 text-decoration: none;
                 transform: translateX(5px);
             }
-            /* Add subtle shadow effect on container */
             .file-list-container {
                 box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
             }
-            /* Add animation for folder expansion */
             .folder-content {
                 transition: max-height 0.3s ease-in-out;
                 overflow: hidden;
@@ -97,7 +93,6 @@ document.addEventListener("DOMContentLoaded", function () {
             .folder-content.collapsed {
                 max-height: 0;
             }
-            /* Add hover card effect */
             .file-link:hover {
                 box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
             }

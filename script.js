@@ -5,13 +5,16 @@ document.addEventListener("DOMContentLoaded", function () {
 
     function createFileList(files, parentElement) {
         const sortedFiles = files.sort((a, b) => {
-            if (a.type === "file" && b.type === "file") {
-                const numA = parseInt(a.name.match(/assignment(\d+)/)?.[1] || 0, 10);
-                const numB = parseInt(b.name.match(/assignment(\d+)/)?.[1] || 0, 10);
-                return numA - numB;
-            }
+            const extractNumber = (name) => parseInt(name.match(/assignment(\d+)/)?.[1] || 0, 10);
+        
+            const numA = extractNumber(a.name);
+            const numB = extractNumber(b.name);
+
+            if (numA !== numB) return numA - numB;
+
             return a.name.localeCompare(b.name);
         });
+        
         
 
         const container = document.createElement("div");

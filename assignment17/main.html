@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Map of India</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 0;
+            padding: 20px;
+            background-color: #f4f4f9;
+        }
+        h1 {
+            margin-bottom: 20px;
+        }
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+        .divider {
+            margin: 20px 0;
+            border-top: 2px solid #ddd;
+        }
+        .info {
+            margin-top: 20px;
+            padding: 20px;
+            border-radius: 8px;
+            background-color: #e3f2fd;
+            color: #333;
+            text-align: left;
+            max-width: 800px;
+            margin: 20px auto;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        .info h2 {
+            color: #0056b3;
+        }
+        .info p {
+            margin: 10px 0;
+            line-height: 1.6;
+        }
+    </style>
+</head>
+<body>
+    <h1>Interactive Map of India</h1>
+    <img src="india-map.jpg" alt="Map of India" usemap="#india-map">
+    <div class="divider"></div>
+    <map name="india-map">
+        <area shape="poly" coords="200,671,209,683,206,701,218,703,218,719,217,729,215,753,222,753,242,747,242,735,249,731,259,723,269,708,275,699,281,695,280,679,278,664,286,650,290,639,292,620,275,623,263,628,245,638,236,638,232,656,225,660,219,663,211,662" href="#tamilnadu" alt="Tamil Nadu">
+        <area shape="poly" coords="114,452,112,465,118,476,120,488,122,503,126,522,123,539,127,548,138,554,145,561,149,553,152,544,165,536,176,533,183,528,186,520,194,516,202,514,219,499,230,490,238,483,243,471,246,464,249,455,263,463,276,464,285,466,286,478,295,489,303,463,298,454,303,438,296,428,295,420,271,416,257,416,238,414,238,420,230,416,221,413,214,417,214,422,205,430,190,423,178,419,168,418,157,405,144,410,152,414,146,419,141,424,141,435,135,441,133,449,121,455,279,415" href="#maharashtra" alt="Maharashtra">
+        <area shape="poly" coords="427,370,436,368,443,367,453,360,461,359,470,348,474,334,472,324,471,313,475,308,478,300,476,291,475,282,486,272,495,276,511,280,512,288,511,295,503,298,488,293,481,312,492,316,486,327,479,332,479,342,489,348,490,363,496,374,498,385,500,393,500,402,480,404,471,408,464,406,447,393,428,377,441,373,439,382" href="#westbengal" alt="West Bengal">
+
+    </map>
+
+    <div id="tamilnadu" class="info">
+        <h2>Tamil Nadu</h2>
+        <p>Located in southern India, Tamil Nadu is known for its rich cultural heritage, intricate temples, and traditional Bharatanatyam dance. Chennai, the capital city, is a hub for technology and education.</p>
+        <p>The state is also famous for its cuisine, featuring dosas, idlis, and filter coffee, as well as its scenic destinations like Ooty, Kodaikanal, and Mahabalipuram.</p>
+    </div>
+    <div id="maharashtra" class="info">
+        <h2>Maharashtra</h2>
+        <p>Maharashtra, in western India, is home to Mumbai, the financial capital of India and the heart of the Bollywood film industry. The state boasts diverse attractions, from the Ajanta and Ellora caves to the beaches of Konkan.</p>
+        <p>Pune, a major cultural and educational center, and the hill stations of Lonavala and Mahabaleshwar are popular destinations. Maharashtra is also renowned for its vibrant festivals, including Ganesh Chaturthi.</p>
+    </div>
+    <div id="westbengal" class="info">
+        <h2>West Bengal</h2>
+        <p>West Bengal, in eastern India, is renowned for its cultural diversity, art, and literature. Kolkata, the capital, is known as the "City of Joy" and was the former capital of British India.</p>
+        <p>The state is famous for the Sundarbans mangrove forests, Darjeeling tea plantations, and the annual Durga Puja festival. Bengali cuisine, featuring dishes like fish curry and sweets like rasgulla, is highly celebrated.</p>
+    </div>
+</body>
+</html>

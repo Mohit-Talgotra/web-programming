@@ -3,21 +3,21 @@ document.addEventListener("DOMContentLoaded", function () {
     const repoName = "web-programming";
     const branch = "main";
 
-    function createFileList(files, parentElement) {
+    function createFileList(files, parentElement, isRoot = false) {
         const sortedFiles = files.sort((a, b) => {
-            const alphaComparison = a.name.localeCompare(b.name);
-            if (alphaComparison !== 0) return alphaComparison;
+            const assignmentRegex = /assignment(\d+)/i;
+            const numA = parseInt(a.name.match(assignmentRegex)?.[1] || 0, 10);
+            const numB = parseInt(b.name.match(assignmentRegex)?.[1] || 0, 10);
 
-            const extractNumber = (name) => parseInt(name.match(/assignment(\d+)/)?.[1] || 0, 10);
-            const numA = extractNumber(a.name);
-            const numB = extractNumber(b.name);
-        
-            return numA - numB;
+            if (numA > 0 && numB > 0) {
+                return numA - numB;
+            }
+
+            if (numA > 0) return -1;
+            if (numB > 0) return 1;
+            return a.name.localeCompare(b.name);
         });
         
-        
-        
-
         const container = document.createElement("div");
         container.className = "file-list-container";
 
@@ -130,13 +130,16 @@ document.addEventListener("DOMContentLoaded", function () {
                     li.appendChild(folderName);
                     li.appendChild(folderContent);
                     
-                    fetchFolderContents(item.path, folderContent);
-                } else if (item.type === "file" && item.name.endsWith(".html") && item.name !== "index.html") {
-                    const link = document.createElement("a");
-                    link.href = `/${repoName}/${item.path}`;
-                    link.className = "file-link";
-                    link.textContent = item.name;
-                    li.appendChild(link);
+                    fetchFolderContents(item.path, folderContent, false);
+                } else if (item.type === "file" && item.name.endsWith(".html")) {
+                    // Only filter out index.html if we're in the root directory
+                    if (!(isRoot && item.name === "index.html")) {
+                        const link = document.createElement("a");
+                        link.href = `/${repoName}/${item.path}`;
+                        link.className = "file-link";
+                        link.textContent = item.name;
+                        li.appendChild(link);
+                    }
                 }
                 
                 ul.appendChild(li);
@@ -145,17 +148,17 @@ document.addEventListener("DOMContentLoaded", function () {
             return ul;
         }
 
-        const fileList = buildList(sortedFiles, true);
+        const fileList = buildList(sortedFiles, isRoot);
         container.appendChild(fileList);
         parentElement.appendChild(container);
     }
 
-    function fetchFolderContents(path, parentElement) {
+    function fetchFolderContents(path, parentElement, isRoot = false) {
         fetch(`https://api.github.com/repos/${repoOwner}/${repoName}/contents/${path}?ref=${branch}`)
             .then(response => response.json())
-            .then(data => createFileList(data, parentElement))
+            .then(data => createFileList(data, parentElement, path === ''))
             .catch(error => console.error('Error fetching folder contents:', error));
     }
 
-    fetchFolderContents('', document.getElementById("fileList"));
+    fetchFolderContents('', document.getElementById("fileList"), true);
 });

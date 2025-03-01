@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SwiftSeats</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>SwiftSeats</h1>
+        <nav>
+            <a href="#home">Home</a>
+            <a href="#events">Events</a>
+            <a href="#booking">Book Tickets</a>
+        </nav>
+    </header>
+
+    <main>
+        <section id="home" class="welcome-section">
+            <h2>Welcome to SwiftSeats!</h2>
+            <p>No hassle, just quick tickets, wherever, whenever</p>
+        </section>
+
+        <section id="events" class="events-section">
+            <h2>Upcoming Events</h2> 
+            
+            <div class="event-container">
+                <div class="event-card">
+                    <h3>Chhava</h3>
+                    <p>Date: March 15, 2025</p>
+                    <p>Location: PVR - Vellore</p>
+                    <p>Price: ₹500.00</p>
+                    <button class="book-btn" data-event="Chhava" data-price="500.00">Book Now</button>
+                </div>
+
+                <div class="event-card">
+                    <h3>Interstellar</h3>
+                    <p>Date: March 10, 2025</p>
+                    <p>Location: IMAX - Vellore</p>
+                    <p>Price: ₹300.00</p>
+                    <button class="book-btn" data-event="Interstellar" data-price="300.00">Book Now</button>
+                </div>
+
+                <div class="event-card">
+                    <h3>Comedy Night With Kapil</h3>
+                    <p>Date: March 20, 2025</p>
+                    <p>Location: Anna Auditorium</p>
+                    <p>Price: ₹400.00</p>
+                    <button class="book-btn" data-event="Comedy Night With Kapil" data-price="400.00">Book Now</button>
+                </div>
+            </div>
+        </section>
+
+        <section id="booking" class="booking-section">
+            <h2>Book Your Tickets</h2>
+            
+            <form id="booking-form">
+                <div class="form-group">
+                    <label for="event-select">Select Event:</label>
+                    <select id="event-select" required>
+                        <option value="">-- Choose an event --</option>
+                        <option value="Chhava" data-price="500.00">Summer Music Festival - ₹500.00</option>
+                        <option value="Interstellar" data-price="300.00">Interstellar - IMAX - ₹300.00</option>
+                        <option value="Comedy Night With Kapil" data-price="400.00">Comedy Night - ₹400.00</option>
+                    </select>
+                    <span id="event-error" class="error"></span>
+                </div>
+
+                <div class="form-group">
+                    <label for="name">Your Name:</label>
+                    <input type="text" id="name" placeholder="Enter your full name" required>
+                    <span id="name-error" class="error"></span>
+                </div>
+
+                <div class="form-group">
+                    <label for="email">Email Address:</label>
+                    <input type="email" id="email" placeholder="Enter your email" required>
+                    <span id="email-error" class="error"></span>
+                </div>
+
+                <div class="form-group">
+                    <label for="phone">Phone Number:</label>
+                    <input type="tel" id="phone" placeholder="Enter your phone number" required>
+                    <span id="phone-error" class="error"></span>
+                </div>
+
+                <div class="form-group">
+                    <label for="tickets">Number of Tickets:</label>
+                    <input type="number" id="tickets" min="1" max="10" value="1" required>
+                    <span id="tickets-error" class="error"></span>
+                </div>
+
+                <div class="form-group">
+                    <label>Select Seats:</label>
+                    <div class="seating-area">
+                        <div class="screen">SCREEN</div>
+                        <div class="seats" id="seat-container">
+                        </div>
+                        <div class="seat-legend">
+                            <div><span class="seat-example available"></span> Available</div>
+                            <div><span class="seat-example selected"></span> Selected</div>
+                            <div><span class="seat-example unavailable"></span> Unavailable</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <h3>Booking Summary</h3>
+                    <div class="summary-box">
+                        <p><strong>Event:</strong> <span id="summary-event">-</span></p>
+                        <p><strong>Number of Tickets:</strong> <span id="summary-tickets">-</span></p>
+                        <p><strong>Selected Seats:</strong> <span id="summary-seats">-</span></p>
+                        <p><strong>Price per Ticket:</strong> <span id="summary-price">-</span></p>
+                        <p><strong>Total Price:</strong> <span id="summary-total">-</span></p>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="payment">Payment Method:</label>
+                    <select id="payment" required>
+                        <option value="">-- Select payment method --</option>
+                        <option value="credit">Credit Card</option>
+                        <option value="paypal">PayPal</option>
+                    </select>
+                    <span id="payment-error" class="error"></span>
+                </div>
+
+                <div id="credit-card-details" style="display: none;">
+                    <div class="form-group">
+                        <label for="card-number">Card Number:</label>
+                        <input type="text" id="card-number" placeholder="1234 5678 9012 3456">
+                        <span id="card-number-error" class="error"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="card-expiry">Expiry Date (MM/YY):</label>
+                        <input type="text" id="card-expiry" placeholder="MM/YY">
+                        <span id="card-expiry-error" class="error"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="card-cvv">CVV:</label>
+                        <input type="text" id="card-cvv" placeholder="123">
+                        <span id="card-cvv-error" class="error"></span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <button type="submit" id="submit-btn">Book Tickets</button>
+                </div>
+            </form>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 Easy Ticket Booking. All rights reserved.</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,20 @@
+.image-container {
+    width: 100%;
+    max-width: 600px;
+    border: 5px solid red;
+    padding: 20px;
+    box-sizing: border-box;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    background-color: #f9f9f9;
+    overflow: hidden;
+}
+
+.image-container img {
+    width: 48%;
+    height: auto;
+    object-fit: cover;
+}

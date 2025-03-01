@@ -1,0 +1,9 @@
+.my-div {
+    background-color: lightblue;
+    border: 2px solid black;
+    border-radius: 10px;
+    padding: 20px;
+    text-align: center;
+    width: 200px;
+    margin: 20px auto;
+}

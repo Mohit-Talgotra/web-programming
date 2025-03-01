@@ -1,0 +1,11 @@
+.centered-div {
+    text-align: center;
+    border: 5px solid red;
+    padding: 20px;
+    width: 50%;
+    margin: 20px auto;
+}
+
+.centered-div a {
+    text-decoration: underline;
+}

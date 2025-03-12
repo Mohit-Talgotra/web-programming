@@ -107,11 +107,11 @@ document.addEventListener("DOMContentLoaded", function () {
                 box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
             }
         `;
+        
         document.head.appendChild(style);
 
         function buildList(items, isRoot = false) {
             const ul = document.createElement("ul");
-            
             items.forEach(item => {
                 const li = document.createElement("li");
                 
@@ -125,18 +125,25 @@ document.addEventListener("DOMContentLoaded", function () {
 
                     folderName.addEventListener('click', () => {
                         folderContent.classList.toggle('collapsed');
+
+                        if (folderContent.children.length === 0) {
+                            fetchFolderContents(item.path, folderContent, false);
+                        }
                     });
                     
                     li.appendChild(folderName);
                     li.appendChild(folderContent);
-                    
-                    fetchFolderContents(item.path, folderContent, false);
                 } else if (item.type === "file") {
                     const link = document.createElement("a");
-                    link.href = `/${repoName}/${item.path}`;
+                    link.href = `https://github.com/${repoOwner}/${repoName}/blob/${branch}/${item.path}`;
                     link.className = "file-link";
                     link.textContent = item.name;
+                    link.target = "_blank";
                     li.appendChild(link);
+                } else {
+                    const itemName = document.createElement("div");
+                    itemName.textContent = item.name + " (" + item.type + ")";
+                    li.appendChild(itemName);
                 }
                 
                 ul.appendChild(li);

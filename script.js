@@ -131,15 +131,12 @@ document.addEventListener("DOMContentLoaded", function () {
                     li.appendChild(folderContent);
                     
                     fetchFolderContents(item.path, folderContent, false);
-                } else if (item.type === "file" && item.name.endsWith(".html")) {
-                    // Only filter out index.html if we're in the root directory
-                    if (!(isRoot && item.name === "index.html")) {
-                        const link = document.createElement("a");
-                        link.href = `/${repoName}/${item.path}`;
-                        link.className = "file-link";
-                        link.textContent = item.name;
-                        li.appendChild(link);
-                    }
+                } else if (item.type === "file") {
+                    const link = document.createElement("a");
+                    link.href = `/${repoName}/${item.path}`;
+                    link.className = "file-link";
+                    link.textContent = item.name;
+                    li.appendChild(link);
                 }
                 
                 ul.appendChild(li);

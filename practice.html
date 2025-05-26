@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Mouse Event Listeners</title>
+    <style>
+        #hoverDiv {
+            width: 200px;
+            height: 200px;
+            background-color: lightblue;
+            margin: 50px;
+        }
+    </style>
+</head>
+<body>
+    <div id="hoverDiv">Hover and Click me!</div>
+
+    <script>
+        // Get the div element
+        const hoverDiv = document.getElementById('hoverDiv');
+
+        // Mouseover event listener
+        hoverDiv.addEventListener('mouseover', function() {
+            hoverDiv.style.backgroundColor = 'lightgreen';
+        });
+
+        // Mouseout event listener
+        hoverDiv.addEventListener('mouseout', function() {
+            hoverDiv.style.backgroundColor = 'lightblue';
+        });
+
+        // Click event listener
+        hoverDiv.addEventListener('click', function() {
+            alert('Div clicked!');
+        });
+        // Context menu event listener
+        hoverDiv.addEventListener('contextmenu', function(event) {
+            event.preventDefault(); // Prevent the default context menu from appearing
+            alert('Right click detected!');
+        });
+    </script>
+</body>
+</html>
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Keydown Event</title>
+</head>
+<body>
+    <input type="text" id="inputBox" placeholder="Type something...">
+    <p id="output"></p>
+
+    <script>
+        // Get the input and output elements
+        const inputBox = document.getElementById('inputBox');
+        const output = document.getElementById('output');
+
+        // Keydown event listener
+        inputBox.addEventListener('keydown', function(event) {
+            output.innerText = `Key pressed: ${event.key}`;
+        });
+    </script>
+</body>
+</html>
